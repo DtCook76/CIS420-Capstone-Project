@@ -101,6 +101,22 @@ defmodule WorkbenchWeb.Router do
 
       live "/supplies/:id", SupplyLive.Show, :show
       live "/supplies/:id/show/edit", SupplyLive.Show, :edit
+
+      #Projects
+      live "/projects", ProjectLive.Index, :index
+      live "/projects/new", ProjectLive.Index, :new
+      live "/projects/:id/edit", ProjectLive.Index, :edit
+
+      live "/projects/:id", ProjectLive.Show, :show
+      live "/projects/:id/show/edit", ProjectLive.Show, :edit
+
+      #Tags
+      live "/tags", TagLive.Index, :index
+      live "/tags/new", TagLive.Index, :new
+      live "/tags/:id/edit", TagLive.Index, :edit
+
+      live "/tags/:id", TagLive.Show, :show
+      live "/tags/:id/show/edit", TagLive.Show, :edit
     end
   end
 
