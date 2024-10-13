@@ -1,0 +1,40 @@
+<.header>
+  Listing Containers
+  <:actions>
+    <.link patch={~p"/containers/new"}>
+      <.button>New Container</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="containers" rows={@streams.containers} row_click={fn {_id, container} ->
+  JS.navigate(~p"/containers/#{container}") end}
+  >
+  <:col :let={{_id, container}} label="Name">
+    <%= container.name %>
+  </:col>
+  <:col :let={{_id, container}} label="Description">
+    <%= container.description %>
+  </:col>
+  <:col :let={{_id, container}} label="Type">
+    <%= container.type %>
+  </:col>
+  <:action :let={{_id, container}}>
+    <div class="sr-only">
+      <.link navigate={~p"/containers/#{container}"}>Show</.link>
+    </div>
+    <.link patch={~p"/containers/#{container}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, container}}>
+    <.link phx-click={JS.push("delete", value: %{id: container.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+      >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="container-modal" show on_cancel={JS.patch(~p"/containers")}>
+  <.live_component module={WorkbenchWeb.ContainerLive.FormComponent} id={@container.id || :new} title={@page_title}
+    action={@live_action} container={@container} locations={@locations} patch={~p"/containers"} />
+</.modal>

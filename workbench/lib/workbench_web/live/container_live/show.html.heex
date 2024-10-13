@@ -1,0 +1,28 @@
+<.header>
+  Container <%= @container.id %>
+  <:subtitle>This is a container record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/containers/#{@container}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit container</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @container.name %></:item>
+  <:item title="Description"><%= @container.description %></:item>
+  <:item title="Type"><%= @container.type %></:item>
+</.list>
+
+<.back navigate={~p"/containers"}>Back to containers</.back>
+
+<.modal :if={@live_action == :edit} id="container-modal" show on_cancel={JS.patch(~p"/containers/#{@container}")}>
+  <.live_component
+    module={WorkbenchWeb.ContainerLive.FormComponent}
+    id={@container.id}
+    title={@page_title}
+    action={@live_action}
+    container={@container}
+    patch={~p"/containers/#{@container}"}
+  />
+</.modal>
