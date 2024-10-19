@@ -6,7 +6,7 @@ defmodule WorkbenchWeb.UserRegistrationLive do
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
+    <div class="relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
       <.header class="text-center">
         Register for an account
         <:subtitle>
@@ -50,7 +50,7 @@ defmodule WorkbenchWeb.UserRegistrationLive do
       |> assign(trigger_submit: false, check_errors: false)
       |> assign_form(changeset)
 
-    {:ok, socket, temporary_assigns: [form: nil]}
+    {:ok, socket, temporary_assigns: [form: nil], layout: {WorkbenchWeb.Layouts, :login}, layout: {WorkbenchWeb.Layouts, :login}}
   end
 
   def handle_event("save", %{"user" => user_params}, socket) do
