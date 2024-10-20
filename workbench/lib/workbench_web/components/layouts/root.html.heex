@@ -18,39 +18,24 @@
     <div
       class="absolute inset-0 bg-[url(/images/background.jpg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]">
     </div>
-
-    <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
-      <%= if @current_user do %>
-        <li class="text-[0.8125rem] leading-6 text-zinc-900">
-          <%= @current_user.email %>
-        </li>
-        <li>
-          <.link href={~p"/users/settings"}
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700">
-            Settings
-          </.link>
-        </li>
-        <li>
-          <.link href={~p"/users/log_out"} method="delete"
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700">
-            Log out
-          </.link>
-        </li>
-        <% else %>
-          <li>
-            <.link href={~p"/users/register"}
-              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700">
-              Register
-            </.link>
-          </li>
-          <li>
-            <.link href={~p"/users/log_in"}
-              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700">
-              Log in
-            </.link>
-          </li>
-          <% end %>
-    </ul>
+    <div class="bg-white py-4 px-6 relative z-10">
+      <nav class="w-full">
+        <div class="w-full flex mt-auto mb-auto ml-auto justify-between max-w-screen-2xl md:flex-row">
+          <div class="flex flex-row justify-center items-center flex-wrap">
+            <a href={~p"/users/settings"} background=""
+              class="text-gray-600 text-center mr-6 font-medium text-base md:flex">Dashboard</a>
+            <a href={~p"/users/settings"} background=""
+              class="text-gray-600 text-center mr-6 font-medium text-base md:flex">Projects</a>
+            <a href={~p"/users/settings"} background=""
+              class="text-gray-600 text-center mr-6 font-medium text-base md:flex">Tools & Supplies</a>
+          </div>
+          <div class="flex flex-row justify-center items-center md:m-0 md:flex">
+            <a href={~p"/users/logout"} class="text-gray-600 text-center mr-6 font-medium text-base">Settings</a>
+            <a href={~p"/users/logout"} class="text-gray-600 text-center font-medium text-base">Log out</a>
+          </div>
+        </div>
+      </nav>
+    </div>
     <%= @inner_content %>
   </div>
 </body>
