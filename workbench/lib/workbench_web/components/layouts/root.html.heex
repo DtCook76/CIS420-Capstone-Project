@@ -1,58 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" class="[scrollbar-gutter:stable]">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title suffix=" · Phoenix Framework">
-      <%= assigns[:page_title] || "Workbench" %>
-    </.live_title>
-    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
-    </script>
-  </head>
-  <body class="bg-white antialiased">
-    <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
-      <%= if @current_user do %>
-        <li class="text-[0.8125rem] leading-6 text-zinc-900">
-          <%= @current_user.email %>
-        </li>
-        <li>
-          <.link
-            href={~p"/users/settings"}
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
-          >
-            Settings
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="csrf-token" content={get_csrf_token()} />
+  <.live_title suffix=" · Phoenix Framework">
+    <%= assigns[:page_title] || "Workbench" %>
+  </.live_title>
+  <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+  <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+  </script>
+</head>
+
+<body class="bg-white antialiased">
+  <%= if @current_user do %>
+    <nav class="sticky top-0 z-10 bg-white backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200">
+      <div class="max-w-8xl mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+          <.link href={~p"/"} class="text-2xl text-gray-900 font-semibold">
+            The Workbench
           </.link>
-        </li>
-        <li>
-          <.link
-            href={~p"/users/log_out"}
-            method="delete"
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
-          >
-            Log out
-          </.link>
-        </li>
-      <% else %>
-        <li>
-          <.link
-            href={~p"/users/register"}
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
-          >
-            Register
-          </.link>
-        </li>
-        <li>
-          <.link
-            href={~p"/users/log_in"}
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
-          >
-            Log in
-          </.link>
-        </li>
-      <% end %>
-    </ul>
-    <%= @inner_content %>
-  </body>
+          <div class="flex space-x-4 text-gray-900">
+            <div>
+              <%= @current_user.email %>
+            </div>
+            <.link href={~p"/"}>
+              Dashboard
+            </.link>
+            <.link href={~p"/projects"}>
+              Projects
+            </.link>
+            <.link href={~p"/tools"}>
+              Tools
+            </.link>
+            <.link href={~p"/supplies"}>
+              Supplies
+            </.link>
+            <.link href={~p"/users/settings"}>
+              Settings
+            </.link>
+            <.link href={~p"/users/log_out"} method="delete">
+              Log out
+            </.link>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <% end %>
+      <%= @inner_content %>
+</body>
+
 </html>
