@@ -6,7 +6,8 @@ defmodule WorkbenchWeb.ProjectLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :projects, Projects.list_projects())}
+    user_id = socket.assigns.current_user.id
+    {:ok, stream(socket, :projects, Projects.list_projects(user_id))}
   end
 
   @impl true

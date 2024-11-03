@@ -17,8 +17,8 @@ defmodule Workbench.Items do
       [%Tool{}, ...]
 
   """
-  def list_tools do
-    Repo.all(Tool)
+  def list_tools(user_id) do
+    Repo.all(from t in Tool, where: t.user_id == ^user_id)
   end
 
   @doc """
@@ -113,8 +113,8 @@ defmodule Workbench.Items do
       [%Supply{}, ...]
 
   """
-  def list_supplies do
-    Repo.all(Supply)
+  def list_supplies(user_id) do
+    Repo.all(from s in Supply, where: s.user_id == ^user_id)
   end
 
   @doc """

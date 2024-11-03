@@ -65,6 +65,7 @@ defmodule WorkbenchWeb.ProjectLive.FormComponent do
   end
 
   defp save_project(socket, :new, project_params) do
+    project_params = add_user_param(socket, project_params)
     case Projects.create_project(project_params) do
       {:ok, project} ->
         notify_parent({:saved, project})
@@ -77,6 +78,11 @@ defmodule WorkbenchWeb.ProjectLive.FormComponent do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
+  end
+
+  def add_user_param(socket, params) do
+    user_id = socket.assigns.current_user.id
+    Map.put(params, "user_id", user_id)
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})

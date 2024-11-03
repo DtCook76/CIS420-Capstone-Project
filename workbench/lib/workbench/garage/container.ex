@@ -7,6 +7,7 @@ defmodule Workbench.Garage.Container do
     field :type, :string
     field :description, :string
     field :location_id, :id
+    belongs_to :user, Workbench.Accounts.User
 
     timestamps(type: :utc_datetime)
   end
@@ -14,7 +15,7 @@ defmodule Workbench.Garage.Container do
   @doc false
   def changeset(container, attrs) do
     container
-    |> cast(attrs, [:location_id, :name, :description, :type])
+    |> cast(attrs, [:location_id, :name, :description, :type, :user_id])
     |> validate_required([:location_id, :name, :description, :type])
   end
 end

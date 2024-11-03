@@ -17,8 +17,8 @@ defmodule Workbench.Projects do
       [%Project{}, ...]
 
   """
-  def list_projects do
-    Repo.all(Project)
+  def list_projects(user_id) do
+    Repo.all(from p in Project, where: p.user_id == ^user_id)
   end
 
   @doc """

@@ -113,8 +113,8 @@ defmodule Workbench.Garage do
       [%Container{}, ...]
 
   """
-  def list_containers do
-    Repo.all(Container)
+  def list_containers(user_id) do
+    Repo.all(from c in Container, where: c.user_id == ^user_id)
   end
 
   @doc """

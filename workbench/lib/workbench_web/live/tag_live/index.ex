@@ -6,7 +6,8 @@ defmodule WorkbenchWeb.TagLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :tags, Tags.list_tags())}
+    user_id = socket.assigns.current_user.id
+    {:ok, stream(socket, :tags, Tags.list_tags(user_id))}
   end
 
   @impl true

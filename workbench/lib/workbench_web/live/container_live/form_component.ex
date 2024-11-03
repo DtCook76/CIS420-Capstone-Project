@@ -67,6 +67,7 @@ defmodule WorkbenchWeb.ContainerLive.FormComponent do
   end
 
   defp save_container(socket, :new, container_params) do
+    container_params = add_user_param(socket, container_params)
     case Garage.create_container(container_params) do
       {:ok, container} ->
         notify_parent({:saved, container})
@@ -79,6 +80,11 @@ defmodule WorkbenchWeb.ContainerLive.FormComponent do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
+  end
+
+  def add_user_param(socket, params) do
+    user_id = socket.assigns.current_user.id
+    Map.put(params, "user_id", user_id)
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})

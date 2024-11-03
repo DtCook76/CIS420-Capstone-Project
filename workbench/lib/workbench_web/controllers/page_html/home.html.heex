@@ -1,1 +1,135 @@
+<div class="w-full flex">
+  <main class="my-1 pt-2 pb-2 px-10 flex-1 rounded-l-lg transition duration-500 ease-in-out overflow-y-auto">
+    <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <div class="flex items-center p-8 bg-white shadow rounded-lg">
+        <div class="grow">
+          <span class="block text-2xl font-bold">12</span>
+          <span class="block text-gray-500">Locations</span>
+        </div>
+        <button class="ml-2">
+          <a href={~p"/locations"}>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 256 512">
+              <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9
+              0l-22.6-22.6c-9.4-9.4-9.4-24.6
+              0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6
+              0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136
+              136c9.5 9.4 9.5 24.6.1 34z"></path>
+            </svg>
+          </a>
+        </button>
+      </div>
+      <div class="flex items-center p-8 bg-white shadow rounded-lg">
+        <div class="grow">
+          <span class="block text-2xl font-bold">12</span>
+          <span class="block text-gray-500">Containers</span>
+        </div>
+        <button class="ml-2">
+          <a href={~p"/containers"}>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 256 512">
+              <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9
+              0l-22.6-22.6c-9.4-9.4-9.4-24.6
+              0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6
+              0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136
+              136c9.5 9.4 9.5 24.6.1 34z"></path>
+            </svg>
+          </a>
+        </button>
+      </div>
+      <div class="flex items-center p-8 bg-white shadow rounded-lg">
+        <div class="grow">
+          <span class="block text-2xl font-bold">12</span>
+          <span class="block text-gray-500">Tags</span>
+        </div>
+        <button class="ml-2">
+          <a href={~p"/tags"}>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 256 512">
+              <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9
+              0l-22.6-22.6c-9.4-9.4-9.4-24.6
+              0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6
+              0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136
+              136c9.5 9.4 9.5 24.6.1 34z"></path>
+            </svg>
+          </a>
+        </button>
+      </div>
+      <div class="flex items-center p-8 bg-white shadow rounded-lg">
+        <div class="grow">
+          <span class="block text-2xl font-bold">12</span>
+          <span class="block text-gray-500">Projects</span>
+        </div>
+        <button class="ml-2">
+          <a href={~p"/projects"}>
+            <svg class="h-5 w-5 fill-current" viewBox="0 0 256 512">
+              <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9
+              0l-22.6-22.6c-9.4-9.4-9.4-24.6
+              0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6
+              0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136
+              136c9.5 9.4 9.5 24.6.1 34z"></path>
+            </svg>
+          </a>
+        </button>
+      </div>
+      <div class="col-span-2 row-span-2 bg-white shadow rounded-lg">
+        <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
+          <span>Tools</span>
+          <button class="ml-2">
+            <a href={~p"/tools"}>
+              <svg class="h-5 w-5 fill-current" viewBox="0 0 256 512">
+                <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9
+                0l-22.6-22.6c-9.4-9.4-9.4-24.6
+                0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6
+                0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136
+                136c9.5 9.4 9.5 24.6.1 34z"></path>
+              </svg>
+            </a>
+          </button>
+        </div>
+        <div class="overflow-y-auto" style="max-height: 24rem;">
+          <ul class="p-6 space-y-6">
+            <%= for tool <- @tools do %>
+              <li class="flex items-center">
+                <span class="text-gray-600">
+                  <%= tool.name %>
+                </span>
+                <span class="ml-auto font-semibold">
+                  <%= tool.description %>
+                </span>
+              </li>
+              <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="col-span-2 row-span-2 bg-white shadow rounded-lg">
+        <div class="flex items-center justify-between px-6 py-5 font-semibold border-b border-gray-100">
+          <span>Supplies</span>
+          <button class="ml-2">
+            <a href={~p"/supplies"}>
+              <svg class="h-5 w-5 fill-current" viewBox="0 0 256 512">
+                <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9
+                0l-22.6-22.6c-9.4-9.4-9.4-24.6
+                0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6
+                0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136
+                136c9.5 9.4 9.5 24.6.1 34z"></path>
+              </svg>
+            </a>
+          </button>
+        </div>
+        <div class="overflow-y-auto" style="max-height: 24rem;">
+          <ul class="p-6 space-y-6">
+            <%= for supply <- @supplies do %>
+              <li class="flex items-center">
+                <span class="text-gray-600">
+                  <%= supply.name %>
+                </span>
+                <span class="ml-auto font-semibold">
+                  <%= supply.description %>
+                </span>
+              </li>
+              <% end %>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
 <.flash_group flash={@flash} />

@@ -64,6 +64,7 @@ defmodule WorkbenchWeb.TagLive.FormComponent do
   end
 
   defp save_tag(socket, :new, tag_params) do
+    tag_params = add_user_param(socket, tag_params)
     case Tags.create_tag(tag_params) do
       {:ok, tag} ->
         notify_parent({:saved, tag})
@@ -76,6 +77,11 @@ defmodule WorkbenchWeb.TagLive.FormComponent do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
+  end
+
+  def add_user_param(socket, params) do
+    user_id = socket.assigns.current_user.id
+    Map.put(params, "user_id", user_id)
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})

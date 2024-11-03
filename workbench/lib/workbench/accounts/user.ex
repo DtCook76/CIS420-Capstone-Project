@@ -8,6 +8,7 @@ defmodule Workbench.Accounts.User do
     field :hashed_password, :string, redact: true
     field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :utc_datetime
+    field :first_name, :string
 
     timestamps(type: :utc_datetime)
   end
@@ -37,7 +38,7 @@ defmodule Workbench.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :first_name])
     |> validate_email(opts)
     |> validate_password(opts)
   end

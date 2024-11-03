@@ -10,6 +10,7 @@ defmodule Workbench.Items.Supply do
     field :image_url, :string
     field :price, :decimal
     field :container_id, :id
+    belongs_to :user, Workbench.Accounts.User
 
     timestamps(type: :utc_datetime)
   end
@@ -17,7 +18,7 @@ defmodule Workbench.Items.Supply do
   @doc false
   def changeset(supply, attrs) do
     supply
-    |> cast(attrs, [:name, :description, :quantity, :restock_link, :image_url, :price])
+    |> cast(attrs, [:name, :description, :quantity, :restock_link, :image_url, :price, :user_id])
     |> validate_required([:name, :description, :quantity, :restock_link, :image_url, :price])
   end
 end

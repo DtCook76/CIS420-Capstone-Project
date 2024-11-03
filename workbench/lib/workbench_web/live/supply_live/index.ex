@@ -3,10 +3,14 @@ defmodule WorkbenchWeb.SupplyLive.Index do
 
   alias Workbench.Items
   alias Workbench.Items.Supply
+  alias Workbench.Garage
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :supplies, Items.list_supplies())}
+    user_id = socket.assigns.current_user.id
+    containers = Garage.list_containers(socket.assigns.current_user.id)
+    socket = assign(socket, :containers, containers)
+    {:ok, stream(socket, :supplies, Items.list_supplies(user_id))}
   end
 
   @impl true

@@ -7,13 +7,15 @@
   </:actions>
 </.header>
 
-<.table
-  id="projects"
-  rows={@streams.projects}
-  row_click={fn {_id, project} -> JS.navigate(~p"/projects/#{project}") end}
->
-  <:col :let={{_id, project}} label="Name"><%= project.name %></:col>
-  <:col :let={{_id, project}} label="Description"><%= project.description %></:col>
+<.table id="projects" rows={@streams.projects} row_click={fn {_id, project} -> JS.navigate(~p"/projects/#{project}")
+  end}
+  >
+  <:col :let={{_id, project}} label="Name">
+    <%= project.name %>
+  </:col>
+  <:col :let={{_id, project}} label="Description">
+    <%= project.description %>
+  </:col>
   <:action :let={{_id, project}}>
     <div class="sr-only">
       <.link navigate={~p"/projects/#{project}"}>Show</.link>
@@ -21,22 +23,15 @@
     <.link patch={~p"/projects/#{project}/edit"}>Edit</.link>
   </:action>
   <:action :let={{id, project}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: project.id}) |> hide("##{id}")}
+    <.link phx-click={JS.push("delete", value: %{id: project.id}) |> hide("##{id}")}
       data-confirm="Are you sure?"
-    >
+      >
       Delete
     </.link>
   </:action>
 </.table>
 
 <.modal :if={@live_action in [:new, :edit]} id="project-modal" show on_cancel={JS.patch(~p"/projects")}>
-  <.live_component
-    module={WorkbenchWeb.ProjectLive.FormComponent}
-    id={@project.id || :new}
-    title={@page_title}
-    action={@live_action}
-    project={@project}
-    patch={~p"/projects"}
-  />
+  <.live_component module={WorkbenchWeb.ProjectLive.FormComponent} id={@project.id || :new} title={@page_title}
+    action={@live_action} project={@project} current_user={@current_user} patch={~p"/projects"} />
 </.modal>

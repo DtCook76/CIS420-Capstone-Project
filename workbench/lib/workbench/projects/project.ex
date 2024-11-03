@@ -13,7 +13,7 @@ defmodule Workbench.Projects.Project do
   @doc false
   def changeset(project, attrs) do
     project
-    |> cast(attrs, [:name, :description])
+    |> cast(attrs, [:name, :description, :user_id])
     |> validate_required([:name, :description])
   end
 end

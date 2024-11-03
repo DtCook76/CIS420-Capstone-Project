@@ -21,6 +21,7 @@ defmodule WorkbenchWeb.ToolLive.FormComponent do
       >
         <.input field={@form[:name]} type="text" label="Name" />
         <.input field={@form[:description]} type="text" label="Description" />
+        <.input field={@form[:container_id]} type="select" label="Container" options={Enum.map(@containers, fn container -> {container.name, container.id} end)} prompt="Choose a Container" />
         <.input field={@form[:image_url]} type="text" label="Image url" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Tool</.button>
@@ -66,6 +67,7 @@ defmodule WorkbenchWeb.ToolLive.FormComponent do
   end
 
   defp save_tool(socket, :new, tool_params) do
+    tool_params = add_user_param(socket, tool_params)
     case Items.create_tool(tool_params) do
       {:ok, tool} ->
         notify_parent({:saved, tool})
@@ -78,6 +80,11 @@ defmodule WorkbenchWeb.ToolLive.FormComponent do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
+  end
+
+  def add_user_param(socket, params) do
+    user_id = socket.assigns.current_user.id
+    Map.put(params, "user_id", user_id)
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})

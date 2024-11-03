@@ -6,10 +6,11 @@ defmodule WorkbenchWeb.ContainerLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    user_id = socket.assigns.current_user.id
     locations = Garage.list_locations(socket.assigns.current_user.id)
     socket = assign(socket, :locations, locations)
     IO.inspect(socket)
-    {:ok, stream(socket, :containers, Garage.list_containers())}
+    {:ok, stream(socket, :containers, Garage.list_containers(user_id))}
   end
 
   @impl true

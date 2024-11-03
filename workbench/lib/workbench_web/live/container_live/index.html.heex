@@ -36,5 +36,6 @@
 
 <.modal :if={@live_action in [:new, :edit]} id="container-modal" show on_cancel={JS.patch(~p"/containers")}>
   <.live_component module={WorkbenchWeb.ContainerLive.FormComponent} id={@container.id || :new} title={@page_title}
-    action={@live_action} container={@container} locations={@locations} patch={~p"/containers"} />
+    current_user={@current_user} action={@live_action} container={@container} locations={@locations}
+    patch={~p"/containers"} />
 </.modal>

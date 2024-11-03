@@ -17,8 +17,8 @@ defmodule Workbench.Tags do
       [%Tag{}, ...]
 
   """
-  def list_tags do
-    Repo.all(Tag)
+  def list_tags(user_id) do
+    Repo.all(from t in Tag, where: t.user_id == ^user_id)
   end
 
   @doc """
@@ -35,6 +35,11 @@ defmodule Workbench.Tags do
       ** (Ecto.NoResultsError)
 
   """
+
+  def list_three_tags(user_id) do
+    Repo.all(from t in Tag, where: t.user_id == ^user_id, limit: 3)
+  end
+
   def get_tag!(id), do: Repo.get!(Tag, id)
 
   @doc """

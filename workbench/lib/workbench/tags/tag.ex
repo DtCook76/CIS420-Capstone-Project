@@ -4,6 +4,7 @@ defmodule Workbench.Tags.Tag do
 
   schema "tags" do
     field :name, :string
+    belongs_to :user, Workbench.Accounts.User
 
     timestamps(type: :utc_datetime)
   end
@@ -11,7 +12,7 @@ defmodule Workbench.Tags.Tag do
   @doc false
   def changeset(tag, attrs) do
     tag
-    |> cast(attrs, [:name])
+    |> cast(attrs, [:name, :user_id])
     |> validate_required([:name])
   end
 end

@@ -22,6 +22,7 @@ defmodule WorkbenchWeb.SupplyLive.FormComponent do
         <.input field={@form[:name]} type="text" label="Name" />
         <.input field={@form[:description]} type="text" label="Description" />
         <.input field={@form[:quantity]} type="number" label="Quantity" />
+        <.input field={@form[:container_id]} type="select" label="Container" options={Enum.map(@containers, fn container -> {container.name, container.id} end)} prompt="Choose a Container" />
         <.input field={@form[:restock_link]} type="text" label="Restock link" />
         <.input field={@form[:image_url]} type="text" label="Image url" />
         <.input field={@form[:price]} type="number" label="Price" step="any" />
@@ -69,6 +70,7 @@ defmodule WorkbenchWeb.SupplyLive.FormComponent do
   end
 
   defp save_supply(socket, :new, supply_params) do
+    supply_params = add_user_param(socket, supply_params)
     case Items.create_supply(supply_params) do
       {:ok, supply} ->
         notify_parent({:saved, supply})
@@ -81,6 +83,11 @@ defmodule WorkbenchWeb.SupplyLive.FormComponent do
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, form: to_form(changeset))}
     end
+  end
+
+  def add_user_param(socket, params) do
+    user_id = socket.assigns.current_user.id
+    Map.put(params, "user_id", user_id)
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
